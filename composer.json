@@ -1,0 +1,27 @@
+{
+  "name": "adellantado/bot-rule-engine",
+  "description": "Rule engine extension for Bot Template Framework",
+  "keywords": [
+    "Chatbot",
+    "Botman",
+    "Bot Template Framework",
+    "Bot Rule Engine"
+  ],
+  "type": "library",
+  "require": {
+    "adellantado/bot-template-framework": "^1.7"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Tymchenko Oleksandr",
+      "email": "adellantado@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "BotTemplateFramework\\": "src/"
+    }
+  }
+}
