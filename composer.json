@@ -9,7 +9,7 @@
   ],
   "type": "library",
   "require": {
-    "adellantado/bot-template-framework": "^1.7"
+    "adellantado/bot-template-framework": "dev-master"
   },
   "license": "MIT",
   "authors": [
