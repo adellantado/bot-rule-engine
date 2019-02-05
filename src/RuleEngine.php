@@ -121,10 +121,13 @@ class RuleEngine {
 
     protected $facade;
 
-    public function __construct(TemplateEngine $engine, IRuleFacade $facade) {
+    protected $userId;
+
+    public function __construct(TemplateEngine $engine, IRuleFacade $facade, $userId = null) {
         $this->engine = $engine;
         $this->scenario = $engine->getTemplate();
         $this->facade = $facade;
+        $this->userId = $userId;
         $this->parse();
     }
 
@@ -143,7 +146,7 @@ class RuleEngine {
     }
 
     public function getUserId() {
-        return $this->facade->getUserId($this->engine->getBot());
+        return $this->userId ?? $this->userId = $this->facade->getUserId($this->engine->getBot());
     }
 
     protected function parse() {
