@@ -91,6 +91,12 @@ interface IRuleFacade {
     public function getVariable($variable, $userId);
 
     /**
+     * @param $userId
+     * @return boolean
+     */
+    public function clearVariables($userId);
+
+    /**
      * @return mixed
      */
     public function notifyAdmin();

@@ -3,6 +3,7 @@
 namespace BotRuleEngine;
 
 use BotRuleEngine\Actions\AddTagAction;
+use BotRuleEngine\Actions\ClearVariablesAction;
 use BotRuleEngine\Actions\CloseChatAction;
 use BotRuleEngine\Actions\DelayAction;
 use BotRuleEngine\Actions\HasNotTagAction;
@@ -43,6 +44,7 @@ use BotTemplateFramework\TemplateEngine;
             {"name": "addTag", "tag": "Egypt"},
             {"name": "delay", "delay": "1d"},
             {"name": "sendBlock", "block": "EgyptDiscount"},
+            {"name": "clearVariables"}
         ]
     },
     {
@@ -206,6 +208,8 @@ class RuleEngine {
                 return HasNotTagAction::create($this->getUserId(), $action['tag']);
             case 'removeTag':
                 return RemoveTagAction::create($this->getUserId(), $action['tag']);
+            case 'clearVariables':
+                return ClearVariablesAction::create($this->getUserId());
             case 'hasVariable':
                 return HasVariableAction::create($this->getUserId(), $action['equation'][0], $action['equation'][1], $action['equation'][2]);
             case 'saveVariable':
