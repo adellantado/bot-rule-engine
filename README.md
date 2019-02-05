@@ -73,5 +73,12 @@ E.g.
             "actions": [
                 {"name": "notifyAdmin"}
             ]
+        },
+        {
+            "name": "rule#9",
+            "trigger": {"name": "paymentApproved"},
+            "actions": [
+                {"name": "clearVariables"}
+            ]
         }
     ]

@@ -21,6 +21,7 @@ use BotRuleEngine\Triggers\BlockExecutedTrigger;
 use BotRuleEngine\Triggers\DriverEventTrigger;
 use BotRuleEngine\Triggers\ITrigger;
 use BotRuleEngine\Triggers\NewUserTrigger;
+use BotRuleEngine\Triggers\PaymentApprovedTrigger;
 use BotRuleEngine\Triggers\TagAddedTrigger;
 use BotRuleEngine\Triggers\TagRemovedTrigger;
 use BotRuleEngine\Triggers\UserInteractionTrigger;
@@ -43,8 +44,7 @@ use BotTemplateFramework\TemplateEngine;
             {"name": "hasTag", "tag": "Traveler"},
             {"name": "addTag", "tag": "Egypt"},
             {"name": "delay", "delay": "1d"},
-            {"name": "sendBlock", "block": "EgyptDiscount"},
-            {"name": "clearVariables"}
+            {"name": "sendBlock", "block": "EgyptDiscount"}
         ]
     },
     {
@@ -101,6 +101,13 @@ use BotTemplateFramework\TemplateEngine;
         "trigger": {"name": "userInteraction"},
         "actions": [
             {"name": "notifyAdmin"}
+        ]
+    },
+    {
+        "name": "rule#9",
+        "trigger": {"name": "paymentApproved"},
+        "actions": [
+            {"name": "clearVariables"}
         ]
     }
 ]
@@ -184,6 +191,8 @@ class RuleEngine {
                 return new VariableRemovedTrigger($this, $trigger['variable']);
             case 'userInteraction':
                 return new UserInteractionTrigger($this);
+            case 'paymentApproved':
+                return new PaymentApprovedTrigger($this);
         }
         return null;
     }
