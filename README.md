@@ -80,5 +80,12 @@ E.g.
             "actions": [
                 {"name": "clearVariables"}
             ]
+        },
+        {   
+            "name": "rule#10",
+            "trigger": {"name": "paymentFailed"},
+            "actions": [
+                {"name": "clearCache"}
+            ]
         }
     ]

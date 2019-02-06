@@ -23,6 +23,7 @@ use BotRuleEngine\Triggers\DriverEventTrigger;
 use BotRuleEngine\Triggers\ITrigger;
 use BotRuleEngine\Triggers\NewUserTrigger;
 use BotRuleEngine\Triggers\PaymentApprovedTrigger;
+use BotRuleEngine\Triggers\PaymentFailedTrigger;
 use BotRuleEngine\Triggers\TagAddedTrigger;
 use BotRuleEngine\Triggers\TagRemovedTrigger;
 use BotRuleEngine\Triggers\UserInteractionTrigger;
@@ -108,7 +109,13 @@ use BotTemplateFramework\TemplateEngine;
         "name": "rule#9",
         "trigger": {"name": "paymentApproved"},
         "actions": [
-            {"name": "clearVariables"},
+            {"name": "clearVariables"}
+        ]
+    },
+    {
+        "name": "rule#10",
+        "trigger": {"name": "paymentFailed"},
+        "actions": [
             {"name": "clearCache"}
         ]
     }
@@ -198,6 +205,8 @@ class RuleEngine {
                 return new UserInteractionTrigger($this);
             case 'paymentApproved':
                 return new PaymentApprovedTrigger($this);
+            case 'paymentFailed':
+                return new PaymentFailedTrigger($this);
         }
         return null;
     }
