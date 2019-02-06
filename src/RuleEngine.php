@@ -3,6 +3,7 @@
 namespace BotRuleEngine;
 
 use BotRuleEngine\Actions\AddTagAction;
+use BotRuleEngine\Actions\ClearCacheAction;
 use BotRuleEngine\Actions\ClearVariablesAction;
 use BotRuleEngine\Actions\CloseChatAction;
 use BotRuleEngine\Actions\DelayAction;
@@ -107,7 +108,8 @@ use BotTemplateFramework\TemplateEngine;
         "name": "rule#9",
         "trigger": {"name": "paymentApproved"},
         "actions": [
-            {"name": "clearVariables"}
+            {"name": "clearVariables"},
+            {"name": "clearCache"}
         ]
     }
 ]
@@ -234,6 +236,8 @@ class RuleEngine {
                 return CloseChatAction::create($this->getUserId());
             case 'unsubscribe':
                 return UnsubscribeAction::create($this->getUserId());
+            case 'clearCache':
+                return ClearCacheAction::create($this->getUserId());
         }
         return null;
     }
