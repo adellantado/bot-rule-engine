@@ -107,4 +107,15 @@ interface IRuleFacade {
      */
     public function notifyAdmin();
 
+    /**
+     * @return \DateTime
+     */
+    public function getLastTimerRan();
+
+    /**
+     * @param \DateTime $date
+     * @return mixed
+     */
+    public function saveLastTimerRan(\DateTime $date);
+
 }

@@ -26,6 +26,7 @@ use BotRuleEngine\Triggers\PaymentApprovedTrigger;
 use BotRuleEngine\Triggers\PaymentFailedTrigger;
 use BotRuleEngine\Triggers\TagAddedTrigger;
 use BotRuleEngine\Triggers\TagRemovedTrigger;
+use BotRuleEngine\Triggers\TimerTrigger;
 use BotRuleEngine\Triggers\UserInteractionTrigger;
 use BotRuleEngine\Triggers\VariableChangedTrigger;
 use BotRuleEngine\Triggers\VariableRemovedTrigger;
@@ -118,6 +119,13 @@ use BotTemplateFramework\TemplateEngine;
         "actions": [
             {"name": "clearCache"}
         ]
+    },
+    {
+        "name": "rule#11",
+        "trigger": {"name": "timer", "every": "5d | 1w | 1m | once", "time":"3rd 15:24 | Thu 15:24 | 15:24"},
+        "actions": [
+
+        ]
     }
 ]
  *
@@ -207,6 +215,8 @@ class RuleEngine {
                 return new PaymentApprovedTrigger($this);
             case 'paymentFailed':
                 return new PaymentFailedTrigger($this);
+            case 'timer':
+                return new TimerTrigger($this, $trigger['time'] ?? '08:00', $trigger['every'] ?? 'once');
         }
         return null;
     }
