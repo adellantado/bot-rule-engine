@@ -118,4 +118,13 @@ interface IRuleFacade {
      */
     public function saveLastTimerRan(\DateTime $date);
 
+    /**
+     * @param $amount
+     * @param $provider
+     * @param $description
+     * @param $userId
+     * @return string
+     */
+    public function getCheckoutUrl($amount, $provider, $description, $userId);
+
 }

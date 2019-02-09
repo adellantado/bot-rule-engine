@@ -7,6 +7,7 @@ use BotRuleEngine\Actions\ClearCacheAction;
 use BotRuleEngine\Actions\ClearVariablesAction;
 use BotRuleEngine\Actions\CloseChatAction;
 use BotRuleEngine\Actions\DelayAction;
+use BotRuleEngine\Actions\GenerateCheckoutUrlAction;
 use BotRuleEngine\Actions\HasNotTagAction;
 use BotRuleEngine\Actions\HasTagAction;
 use BotRuleEngine\Actions\HasVariableAction;
@@ -124,7 +125,7 @@ use BotTemplateFramework\TemplateEngine;
         "name": "rule#11",
         "trigger": {"name": "timer", "every": "5d | 1w | 1m | once", "time":"3rd 15:24 | Thu 15:24 | 15:24"},
         "actions": [
-
+            {"name": "generateCheckoutUrl", "provider": "fondy", "description": "bike rent payment", "amount": "myVariableWithSum", "variable": "myUrl"}
         ]
     }
 ]
@@ -257,6 +258,8 @@ class RuleEngine {
                 return UnsubscribeAction::create($this->getUserId());
             case 'clearCache':
                 return ClearCacheAction::create($this->getUserId());
+            case 'generateCheckoutUrl':
+                return GenerateCheckoutUrlAction::create($this->getUserId(), $action['amount'], $action['provider'], $action['description'], $action['variable'] ?? 'checkoutUrl');
         }
         return null;
     }

@@ -87,5 +87,12 @@ E.g.
             "actions": [
                 {"name": "clearCache"}
             ]
+        },
+        {   
+            "name": "rule#11",
+            "trigger": {"name": "timer", "every": "5d | 1w | 1m | once", "time":"3rd 15:24 | Thu 15:24 | 15:24"},
+            "actions": [
+                {"name": "generateCheckoutUrl", "provider": "fondy", "description": "bike rent payment", "amount": "myVariableWithSum", "variable": "myUrl"}
+            ]
         }
     ]
