@@ -94,5 +94,12 @@ E.g.
             "actions": [
                 {"name": "generateCheckoutUrl", "provider": "fondy", "description": "bike rent payment", "amount": "myVariableWithSum", "variable": "myUrl"}
             ]
+        },
+        {
+            "name": "rule#12",
+            "trigger": {"name": "external"},
+            "actions": [
+     
+            ]
         }
     ]

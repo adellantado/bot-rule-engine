@@ -21,6 +21,7 @@ use BotRuleEngine\Actions\SendBlockAction;
 use BotRuleEngine\Actions\UnsubscribeAction;
 use BotRuleEngine\Triggers\BlockExecutedTrigger;
 use BotRuleEngine\Triggers\DriverEventTrigger;
+use BotRuleEngine\Triggers\ExternalTrigger;
 use BotRuleEngine\Triggers\ITrigger;
 use BotRuleEngine\Triggers\NewUserTrigger;
 use BotRuleEngine\Triggers\PaymentApprovedTrigger;
@@ -127,6 +128,13 @@ use BotTemplateFramework\TemplateEngine;
         "actions": [
             {"name": "generateCheckoutUrl", "provider": "fondy", "description": "bike rent payment", "amount": "myVariableWithSum", "variable": "myUrl"}
         ]
+    },
+    {
+        "name": "rule#12",
+        "trigger": {"name": "external"},
+        "actions": [
+
+        ]
     }
 ]
  *
@@ -218,6 +226,8 @@ class RuleEngine {
                 return new PaymentFailedTrigger($this);
             case 'timer':
                 return new TimerTrigger($this, $trigger['time'] ?? '08:00', $trigger['every'] ?? 'once');
+            case 'external':
+                return new ExternalTrigger($this);
         }
         return null;
     }
