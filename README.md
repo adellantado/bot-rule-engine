@@ -69,7 +69,7 @@ E.g.
         },
         {
             "name": "rule#8",
-            "trigger": {"name": "userInteraction"},
+            "trigger": {"name": "userInteraction", "phrase": "hey there!"},
             "actions": [
                 {"name": "notifyAdmin"}
             ]

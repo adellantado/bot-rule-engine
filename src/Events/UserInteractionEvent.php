@@ -8,7 +8,10 @@ use BotTemplateFramework\Events\Event;
 
 class UserInteractionEvent extends Event {
 
-    public function __construct() {
+    public $phrase;
+
+    public function __construct($phrase = null) {
+        $this->phrase = $phrase;
         parent::__construct('userInteraction');
     }
 

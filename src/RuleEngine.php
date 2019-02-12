@@ -102,7 +102,7 @@ use BotTemplateFramework\TemplateEngine;
     },
     {
         "name": "rule#8",
-        "trigger": {"name": "userInteraction"},
+        "trigger": {"name": "userInteraction", "phrase": "hey there!"},
         "actions": [
             {"name": "notifyAdmin"}
         ]
@@ -211,7 +211,7 @@ class RuleEngine {
             case 'variableRemoved':
                 return new VariableRemovedTrigger($this, $trigger['variable']);
             case 'userInteraction':
-                return new UserInteractionTrigger($this);
+                return new UserInteractionTrigger($this, $trigger['phrase'] ?? null);
             case 'paymentApproved':
                 return new PaymentApprovedTrigger($this);
             case 'paymentFailed':
