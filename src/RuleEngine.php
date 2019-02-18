@@ -3,6 +3,7 @@
 namespace BotRuleEngine;
 
 use BotRuleEngine\Actions\AddTagAction;
+use BotRuleEngine\Actions\CalculateAction;
 use BotRuleEngine\Actions\ClearCacheAction;
 use BotRuleEngine\Actions\ClearVariablesAction;
 use BotRuleEngine\Actions\CloseChatAction;
@@ -133,7 +134,7 @@ use BotTemplateFramework\TemplateEngine;
         "name": "rule#12",
         "trigger": {"name": "external"},
         "actions": [
-
+            {"name": "calculate", "equation": ["firstVar", "+ | - | * | /", "secondVar", "myVariable"]}
         ]
     }
 ]
@@ -260,6 +261,8 @@ class RuleEngine {
                 return SaveVariableAction::create($this->getUserId(), $action['variable'], $action['value']);
             case 'removeVariable':
                 return RemoveVariableAction::create($this->getUserId(), $action['variable']);
+            case 'calculate':
+                return CalculateAction::create($this->getUserId(), $action['equation'][0], $action['equation'][1], $action['equation'][2], $action['equation'][3]);
             case 'openChat':
                 return OpenChatAction::create($this->getUserId());
             case 'closeChat':

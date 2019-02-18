@@ -91,6 +91,13 @@ interface IRuleFacade {
     public function getVariable($variable, $userId);
 
     /**
+     * @param $variable
+     * @param $userId
+     * @return boolean
+     */
+    public function hasVariable($variable, $userId);
+
+    /**
      * @param $userId
      * @return boolean
      */
