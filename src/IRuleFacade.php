@@ -57,17 +57,17 @@ interface IRuleFacade {
 
     /**
      * @param $userId
-     * @param $block
+     * @param $blockName
      * @return boolean
      */
-    public function sendBlock($userId, $block);
+    public function sendBlock($userId, $blockName);
 
     /**
      * @param $userId
-     * @param $flow
+     * @param $flowName
      * @return boolean
      */
-    public function sendFlow($userId, $flow);
+    public function sendFlow($userId, $flowName);
 
     /**
      * @param $userId

@@ -244,9 +244,9 @@ class RuleEngine {
             case 'delay':
                 return DelayAction::create($action['delay']);
             case 'sendBlock':
-                return SendBlockAction::create($this->getUserId(), $this->getTemplateEngine()->getBlock($action['block']));
+                return SendBlockAction::create($this->getUserId(), $action['block']);
             case 'sendFlow':
-                return SendFlowAction::create($this->getUserId(), (new FlowHelper($this->getTemplateEngine()))->getFlowByName($action['flow']));
+                return SendFlowAction::create($this->getUserId(), $action['flow']);
             case 'notifyAdmin':
                 return NotifyAdminAction::create();
             case 'hasTag':
