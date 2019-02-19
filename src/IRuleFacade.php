@@ -64,6 +64,13 @@ interface IRuleFacade {
 
     /**
      * @param $userId
+     * @param $flow
+     * @return boolean
+     */
+    public function sendFlow($userId, $flow);
+
+    /**
+     * @param $userId
      * @return boolean
      */
     public function unsubscribe($userId);

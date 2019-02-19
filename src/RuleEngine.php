@@ -19,6 +19,7 @@ use BotRuleEngine\Actions\RemoveTagAction;
 use BotRuleEngine\Actions\RemoveVariableAction;
 use BotRuleEngine\Actions\SaveVariableAction;
 use BotRuleEngine\Actions\SendBlockAction;
+use BotRuleEngine\Actions\SendFlowAction;
 use BotRuleEngine\Actions\UnsubscribeAction;
 use BotRuleEngine\Triggers\BlockExecutedTrigger;
 use BotRuleEngine\Triggers\DriverEventTrigger;
@@ -134,7 +135,8 @@ use BotTemplateFramework\TemplateEngine;
         "name": "rule#12",
         "trigger": {"name": "external"},
         "actions": [
-            {"name": "calculate", "equation": ["firstVar", "+ | - | * | /", "secondVar", "myVariable"]}
+            {"name": "calculate", "equation": ["firstVar", "+ | - | * | /", "secondVar", "myVariable"]},
+            {"name": "sendFlow", "flow": "EgyptTour"}
         ]
     }
 ]
@@ -243,6 +245,8 @@ class RuleEngine {
                 return DelayAction::create($action['delay']);
             case 'sendBlock':
                 return SendBlockAction::create($this->getUserId(), $this->getTemplateEngine()->getBlock($action['block']));
+            case 'sendFlow':
+                return SendFlowAction::create($this->getUserId(), (new FlowHelper($this->getTemplateEngine()))->getFlowByName($action['flow']));
             case 'notifyAdmin':
                 return NotifyAdminAction::create();
             case 'hasTag':
