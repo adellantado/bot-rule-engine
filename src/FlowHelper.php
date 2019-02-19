@@ -36,19 +36,20 @@ class FlowHelper {
         if (is_array($block['next'])) {
 
             if ($block['type'] == 'if') {
-                $keys = [];
                 foreach($block['next'] as $eq) {
-                    $keys[] = $eq[3];
+                    $key = $eq[3];
+                    $next = $this->engine->getBlock($key,
+                        array_key_exists('locale', $block) ? $block['locale'] : null);
+                    $flow = array_merge($flow, $this->getFlowByBlock($next));
                 }
 
             } else {
                 $keys = array_keys($block['next']);
-            }
-
-            foreach($keys as $key) {
-                $next = $this->engine->getBlock($block['next'][$key],
-                    array_key_exists('locale', $block) ? $block['locale'] : null);
-                $flow = array_merge($flow, $this->getFlowByBlock($next));
+                foreach($keys as $key) {
+                    $next = $this->engine->getBlock($block['next'][$key],
+                        array_key_exists('locale', $block) ? $block['locale'] : null);
+                    $flow = array_merge($flow, $this->getFlowByBlock($next));
+                }
             }
 
         } else {
