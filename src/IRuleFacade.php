@@ -117,9 +117,11 @@ interface IRuleFacade {
     public function clearCache($userId);
 
     /**
+     * @param string|null $email
+     * @param string|null $userId
      * @return mixed
      */
-    public function notifyAdmin();
+    public function notifyAdmin($email = null, $userId = null);
 
     /**
      * @return \DateTime

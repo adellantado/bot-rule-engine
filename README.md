@@ -71,7 +71,7 @@ E.g.
             "name": "rule#8",
             "trigger": {"name": "userInteraction", "phrase": "hey there!"},
             "actions": [
-                {"name": "notifyAdmin"}
+                {"name": "notifyAdmin", "email": "test@test.com", "userId": "012366334"}
             ]
         },
         {
@@ -99,7 +99,8 @@ E.g.
             "name": "rule#12",
             "trigger": {"name": "external"},
             "actions": [
-     
+                {"name": "calculate", "equation": ["firstVar", "+ | - | * | /", "secondVar", "myVariable"]},
+                {"name": "sendFlow", "flow": "EgyptTour"}
             ]
         }
     ]

@@ -107,7 +107,7 @@ use BotTemplateFramework\TemplateEngine;
         "name": "rule#8",
         "trigger": {"name": "userInteraction", "phrase": "hey there!"},
         "actions": [
-            {"name": "notifyAdmin"}
+            {"name": "notifyAdmin", "email": "test@test.com", "userId": "012366334"}
         ]
     },
     {
@@ -248,7 +248,7 @@ class RuleEngine {
             case 'sendFlow':
                 return SendFlowAction::create($this->getUserId(), $action['flow']);
             case 'notifyAdmin':
-                return NotifyAdminAction::create();
+                return NotifyAdminAction::create($action['email'] ?? null, $action['userId'] ?? null);
             case 'hasTag':
                 return HasTagAction::create($this->getUserId(), $action['tag']);
             case 'addTag':
