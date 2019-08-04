@@ -27,6 +27,7 @@ class RequestAction extends AbstractAction {
         if ($this->postData === null) {
             $this->postData = $this->data;
         }
+        $this->postData = $this->getValue($this->postData);
         if ($this->getEngine()->getRuleFacade()->sendRequest($this->url, $this->method, $this->postData, $this->userId) === false) {
             return $this;
         }

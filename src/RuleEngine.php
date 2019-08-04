@@ -214,6 +214,16 @@ class RuleEngine {
         return $trigger;
     }
 
+    public function getValue($value) {
+        $matches = [];
+        if (preg_match_all('/{{(.+?)}}/', $value, $matches)) {
+            foreach ($matches[1] as $match) {
+                $value = preg_replace('/{{' . $match . '}}/',$this->getRuleFacade()->getVariable($match, $this->getUserId()), $value);
+            }
+        }
+        return $value;
+    }
+
     /**
      * @param $trigger
      * @return ITrigger

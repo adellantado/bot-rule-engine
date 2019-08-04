@@ -32,6 +32,7 @@ class HasVariableAction extends AbstractAction {
 
     protected function checkVariable() {
         $value = $this->getEngine()->getRuleFacade()->getVariable($this->variable, $this->userId);
+        $this->value = $this->getValue($this->value);
         if (
             ($this->operator == '==' && $value == $this->value) ||
             ($this->operator == '!=' && $value != $this->value) ||

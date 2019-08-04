@@ -14,7 +14,7 @@ class UserInteractionTrigger extends AbstractTrigger {
         $engine->getTemplateEngine()->addEventListener('userInteraction', function(UserInteractionEvent $event) use ($phrase) {
             if (!$phrase) {
                 $this->trigger();
-            } elseif ($event->phrase == $phrase) {
+            } elseif ($event->phrase == $this->getValue($phrase)) {
                 $this->trigger();
             }
         });

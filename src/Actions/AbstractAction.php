@@ -67,4 +67,8 @@ abstract class AbstractAction implements IAction {
         $this->getEngine()->getTemplateEngine()->dispatchEvent($event);
     }
 
+    protected function getValue($value){
+        return $this->engine->getValue($value);
+    }
+
 }

@@ -24,6 +24,7 @@ class ValidateAction extends AbstractAction {
         if ($this->value === null) {
             $this->value = $this->data;
         }
+        $this->value = $this->getValue($this->value);
         if ($this->getEngine()->getRuleFacade()->validate($this->type, $this->value, $this->userId) === false) {
             return $this;
         }

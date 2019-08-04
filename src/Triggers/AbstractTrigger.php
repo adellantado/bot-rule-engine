@@ -34,4 +34,8 @@ class AbstractTrigger implements ITrigger {
         return $this->engine;
     }
 
+    protected function getValue($value){
+        return $this->engine->getValue($value);
+    }
+
 }
