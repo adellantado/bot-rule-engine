@@ -107,7 +107,9 @@ E.g.
             "name": "rule#13",
             "trigger": {"name": "referralPassed"},
             "actions": [
-                {"name": "saveVariable", "variable": "referralData"}
+                {"name": "saveVariable", "variable": "referralData"},
+                {"name": "validate", "value": "123", "type": "number | email | url"},
+                {"name": "request", "url": "http://api.icndb.com/jokes/random", "method": "post", "data": {"name": "Alex", "sex": "male"}}
             ]
         }
     ]

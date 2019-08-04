@@ -18,10 +18,12 @@ use BotRuleEngine\Actions\NotifyAdminAction;
 use BotRuleEngine\Actions\OpenChatAction;
 use BotRuleEngine\Actions\RemoveTagAction;
 use BotRuleEngine\Actions\RemoveVariableAction;
+use BotRuleEngine\Actions\RequestAction;
 use BotRuleEngine\Actions\SaveVariableAction;
 use BotRuleEngine\Actions\SendBlockAction;
 use BotRuleEngine\Actions\SendFlowAction;
 use BotRuleEngine\Actions\UnsubscribeAction;
+use BotRuleEngine\Actions\ValidateAction;
 use BotRuleEngine\Triggers\BlockExecutedTrigger;
 use BotRuleEngine\Triggers\DriverEventTrigger;
 use BotRuleEngine\Triggers\ExternalTrigger;
@@ -292,6 +294,10 @@ class RuleEngine {
                 return ClearCacheAction::create($this->getUserId());
             case 'generateCheckoutUrl':
                 return GenerateCheckoutUrlAction::create($this->getUserId(), $action['amount'], $action['provider'], $action['description'], $action['variable'] ?? 'checkoutUrl');
+            case 'validate':
+                return ValidateAction::create($this->getUserId(), $action['type'], isset($action['value']) ? $action['value'] : null);
+            case 'request':
+                return RequestAction::create($this->getUserId(), $action['url'], isset($action['data']) ? $action['data'] : null, isset($action['method']) ? $action['method'] : 'post');
         }
         return null;
     }

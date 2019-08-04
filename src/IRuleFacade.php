@@ -149,4 +149,21 @@ interface IRuleFacade {
      */
     public function getCheckoutUrl($amount, $provider, $description, $userId);
 
+    /**
+     * @param $type
+     * @param $value
+     * @param $userId
+     * @return boolean
+     */
+    public function validate($type, $value, $userId);
+
+    /**
+     * @param $url
+     * @param $method
+     * @param $data
+     * @param $userId
+     * @return boolean
+     */
+    public function sendRequest($url, $method, $data, $userId);
+
 }
