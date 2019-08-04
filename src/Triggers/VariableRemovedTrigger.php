@@ -13,6 +13,7 @@ class VariableRemovedTrigger extends AbstractTrigger {
         parent::__construct($engine);
         $engine->getTemplateEngine()->addEventListener('variableRemoved', function(VariableRemovedEvent $event) use ($variable) {
             if ($event->variable == $variable) {
+                $this->action->setData($event->variable);
                 $this->trigger();
             }
         });

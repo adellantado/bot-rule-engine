@@ -12,6 +12,7 @@ class PaymentApprovedTrigger extends AbstractTrigger {
     public function __construct(RuleEngine $engine) {
         parent::__construct($engine);
         $engine->getTemplateEngine()->addEventListener('paymentApproved', function(PaymentApprovedEvent $event) {
+            $this->action->setData($event->payment);
             $this->trigger();
         });
     }

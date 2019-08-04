@@ -13,4 +13,10 @@ interface IAction {
 
     public function setEngine(RuleEngine $engine);
 
+    /**
+     * @param $data
+     * @return IAction
+     */
+    public function setData($data);
+
 }

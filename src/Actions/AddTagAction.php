@@ -20,6 +20,9 @@ class AddTagAction extends AbstractAction {
     }
 
     public function execute() {
+        if ($this->tag === null) {
+            $this->tag = $this->data;
+        }
         if ($this->getEngine()->getRuleFacade()->addTag($this->tag, $this->userId) === false) {
             return $this;
         }

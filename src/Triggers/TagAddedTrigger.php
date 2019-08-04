@@ -13,6 +13,7 @@ class TagAddedTrigger extends AbstractTrigger {
         parent::__construct($engine);
         $engine->getTemplateEngine()->addEventListener('tagAdded', function(TagAddedEvent $event) use ($tag) {
             if ($event->tag == $tag) {
+                $this->action->setData($event->tag);
                 $this->trigger();
             }
         });

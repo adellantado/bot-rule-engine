@@ -48,6 +48,7 @@ class CalculateAction extends AbstractAction {
         } elseif ($this->operator == '/') {
             $result = $operand1 / $operand2;
         }
+        $this->setDataToNext($result);
         return $this->getEngine()->getRuleFacade()->saveVariable($this->result, $result, $this->userId);
     }
 

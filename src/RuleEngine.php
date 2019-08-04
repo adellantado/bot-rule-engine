@@ -3,6 +3,7 @@
 namespace BotRuleEngine;
 
 use BotRuleEngine\Actions\AddTagAction;
+use BotRuleEngine\Actions\BlockAction;
 use BotRuleEngine\Actions\CalculateAction;
 use BotRuleEngine\Actions\ClearCacheAction;
 use BotRuleEngine\Actions\ClearVariablesAction;
@@ -28,6 +29,7 @@ use BotRuleEngine\Triggers\ITrigger;
 use BotRuleEngine\Triggers\NewUserTrigger;
 use BotRuleEngine\Triggers\PaymentApprovedTrigger;
 use BotRuleEngine\Triggers\PaymentFailedTrigger;
+use BotRuleEngine\Triggers\ReferralPassedTrigger;
 use BotRuleEngine\Triggers\TagAddedTrigger;
 use BotRuleEngine\Triggers\TagRemovedTrigger;
 use BotRuleEngine\Triggers\TimerTrigger;
@@ -66,7 +68,8 @@ use BotTemplateFramework\TemplateEngine;
         "trigger": {"name": "newUser"},
         "actions": [
             {"name": "saveVariable", "variable": "userName", "value": "Patrick"},
-            {"name": "unsubscribe"}
+            {"name": "unsubscribe"},
+            {"name": "block"}
         ]
     },
     {
@@ -138,7 +141,15 @@ use BotTemplateFramework\TemplateEngine;
             {"name": "calculate", "equation": ["firstVar", "+ | - | * | /", "secondVar", "myVariable"]},
             {"name": "sendFlow", "flow": "EgyptTour"}
         ]
+    },
+    {
+        "name": "rule#13",
+        "trigger": {"name": "referralPassed"},
+        "actions": [
+            {"name": "saveVariable", "variable": "referralData"}
+        ]
     }
+ *
 ]
  *
  */
@@ -231,6 +242,8 @@ class RuleEngine {
                 return new TimerTrigger($this, $trigger['time'] ?? '08:00', $trigger['every'] ?? 'once');
             case 'external':
                 return new ExternalTrigger($this);
+            case 'referralPassed':
+                return new ReferralPassedTrigger($this);
         }
         return null;
     }
@@ -244,27 +257,27 @@ class RuleEngine {
             case 'delay':
                 return DelayAction::create($action['delay']);
             case 'sendBlock':
-                return SendBlockAction::create($this->getUserId(), $action['block']);
+                return SendBlockAction::create($this->getUserId(), isset($action['block']) ? $action['block'] : null);
             case 'sendFlow':
-                return SendFlowAction::create($this->getUserId(), $action['flow']);
+                return SendFlowAction::create($this->getUserId(), isset($action['flow']) ? $action['flow'] : null);
             case 'notifyAdmin':
                 return NotifyAdminAction::create($action['email'] ?? null, $action['userId'] ?? null);
             case 'hasTag':
                 return HasTagAction::create($this->getUserId(), $action['tag']);
             case 'addTag':
-                return AddTagAction::create($this->getUserId(), $action['tag']);
+                return AddTagAction::create($this->getUserId(), isset($action['tag']) ? $action['tag'] : null);
             case 'hasNotTag':
                 return HasNotTagAction::create($this->getUserId(), $action['tag']);
             case 'removeTag':
-                return RemoveTagAction::create($this->getUserId(), $action['tag']);
+                return RemoveTagAction::create($this->getUserId(), isset($action['tag']) ? $action['tag'] : null);
             case 'clearVariables':
                 return ClearVariablesAction::create($this->getUserId());
             case 'hasVariable':
                 return HasVariableAction::create($this->getUserId(), $action['equation'][0], $action['equation'][1], $action['equation'][2]);
             case 'saveVariable':
-                return SaveVariableAction::create($this->getUserId(), $action['variable'], $action['value']);
+                return SaveVariableAction::create($this->getUserId(), $action['variable'], isset($action['value']) ? $action['value'] : null);
             case 'removeVariable':
-                return RemoveVariableAction::create($this->getUserId(), $action['variable']);
+                return RemoveVariableAction::create($this->getUserId(), isset($action['variable']) ? $action['variable'] : null);
             case 'calculate':
                 return CalculateAction::create($this->getUserId(), $action['equation'][0], $action['equation'][1], $action['equation'][2], $action['equation'][3]);
             case 'openChat':
@@ -273,6 +286,8 @@ class RuleEngine {
                 return CloseChatAction::create($this->getUserId());
             case 'unsubscribe':
                 return UnsubscribeAction::create($this->getUserId());
+            case 'block':
+                return BlockAction::create($this->getUserId());
             case 'clearCache':
                 return ClearCacheAction::create($this->getUserId());
             case 'generateCheckoutUrl':

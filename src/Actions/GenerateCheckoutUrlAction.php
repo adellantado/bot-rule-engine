@@ -36,6 +36,7 @@ class GenerateCheckoutUrlAction extends AbstractAction {
             return $this;
         }
 
+        $this->setDataToNext($url);
         return parent::execute();
     }
 

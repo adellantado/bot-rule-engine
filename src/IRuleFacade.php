@@ -77,6 +77,12 @@ interface IRuleFacade {
 
     /**
      * @param $userId
+     * @return boolean
+     */
+    public function block($userId);
+
+    /**
+     * @param $userId
      * @param $variable
      * @return boolean
      */

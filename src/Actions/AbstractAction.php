@@ -12,6 +12,8 @@ abstract class AbstractAction implements IAction {
     /** @var  IAction */
     public $action;
 
+    public $data;
+
     /** @var  RuleEngine */
     private $engine;
 
@@ -40,9 +42,21 @@ abstract class AbstractAction implements IAction {
         return $this;
     }
 
+    public function setData($data) {
+        $this->data = $data;
+        return $this;
+    }
+
+    public function setDataToNext($data) {
+        if ($this->action) {
+            $this->action->setData($data);
+        }
+        return $this;
+    }
+
     public function __sleep() {
         $this->action = serialize($this->action);
-        return ['action'];
+        return ['action', 'data'];
     }
 
     public function __wakeup() {

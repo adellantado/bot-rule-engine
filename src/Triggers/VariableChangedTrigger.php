@@ -21,6 +21,7 @@ class VariableChangedTrigger extends AbstractTrigger {
                     ($operator == '>=' && $event->value >= $value) ||
                     ($operator == '<=' && $event->value <= $value)
                 ) {
+                    $this->action->setData($event->value);
                     $this->trigger();
                 }
             }

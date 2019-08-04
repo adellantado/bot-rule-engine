@@ -20,6 +20,9 @@ class RemoveVariableAction extends AbstractAction {
     }
 
     public function execute() {
+        if ($this->variable === null) {
+            $this->variable = $this->data;
+        }
         if ($this->getEngine()->getRuleFacade()->removeVariable($this->userId, $this->variable) === false) {
             return $this;
         }

@@ -23,6 +23,9 @@ class SaveVariableAction extends AbstractAction {
     }
 
     public function execute() {
+        if ($this->value === null) {
+            $this->value = $this->data;
+        }
         if ($this->getEngine()->getRuleFacade()->saveVariable($this->variable, $this->value, $this->userId) === false) {
             return $this;
         }

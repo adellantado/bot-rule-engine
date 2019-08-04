@@ -102,5 +102,12 @@ E.g.
                 {"name": "calculate", "equation": ["firstVar", "+ | - | * | /", "secondVar", "myVariable"]},
                 {"name": "sendFlow", "flow": "EgyptTour"}
             ]
+        },
+        {  
+            "name": "rule#13",
+            "trigger": {"name": "referralPassed"},
+            "actions": [
+                {"name": "saveVariable", "variable": "referralData"}
+            ]
         }
     ]

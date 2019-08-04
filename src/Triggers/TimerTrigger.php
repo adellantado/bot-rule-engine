@@ -50,12 +50,14 @@ class TimerTrigger extends AbstractTrigger {
 
         // check time ( 15:24 )
         if ($now->format('H:i') == $time) {
+            $this->action->setData($now->getTimestamp());
             $this->trigger();
             return;
         }
 
         // check day of week and time ( Thu 15:24 )
         if ($now->format('D H:i') == trim($time)) {
+            $this->action->setData($now->getTimestamp());
             $this->trigger();
             return;
         }
@@ -65,6 +67,7 @@ class TimerTrigger extends AbstractTrigger {
         $suf = $day < 4 ? ['st', 'nd', 'rd'][$day] : 'th';
         $t = $now->format('H:i');
         if ($day.$suf.' '.$t == trim($time)) {
+            $this->action->setData($now->getTimestamp());
             $this->trigger();
             return;
         }
