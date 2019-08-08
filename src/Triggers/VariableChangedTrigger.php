@@ -13,6 +13,7 @@ class VariableChangedTrigger extends AbstractTrigger {
         parent::__construct($engine);
         $engine->getTemplateEngine()->addEventListener('variableChanged', function(VariableChangedEvent $event) use ($variable, $operator, $value) {
             if ($event->variable == $variable) {
+                $value = $this->getValue($value);
                 if (
                     ($operator == '==' && $event->value == $value) ||
                     ($operator == '!=' && $event->value != $value) ||
