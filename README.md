@@ -109,7 +109,8 @@ E.g.
             "actions": [
                 {"name": "saveVariable", "variable": "referralData"},
                 {"name": "validate", "value": "123", "type": "number | email | url"},
-                {"name": "request", "url": "http://api.icndb.com/jokes/random", "method": "post", "data": {"name": "Alex", "sex": "male"}}
+                {"name": "request", "url": "http://api.icndb.com/jokes/random", "method": "post", "data": {"name": "Alex", "sex": "male"}, 
+                    "headers": {"Content-Type": "application/json"}, "variable": "testVar"}
             ]
         }
     ]

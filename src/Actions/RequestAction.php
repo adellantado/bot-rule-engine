@@ -12,14 +12,20 @@ class RequestAction extends AbstractAction {
 
     public $method;
 
+    public $headers;
+
+    public $variable;
+
     public $userId;
 
-    public static function create($userId, $url, $data, $method = 'post') {
+    public static function create($userId, $url, $data, $method = 'post', $headers = null, $variable = null) {
         $instance = new RequestAction();
         $instance->userId = $userId;
         $instance->method = $method;
         $instance->url = $url;
         $instance->postData = $data;
+        $instance->headers = $headers;
+        $instance->variable = $variable;
         return $instance;
     }
 
@@ -28,7 +34,7 @@ class RequestAction extends AbstractAction {
             $this->postData = $this->data;
         }
         $this->postData = $this->getValue($this->postData);
-        if ($this->getEngine()->getRuleFacade()->sendRequest($this->url, $this->method, $this->postData, $this->userId) === false) {
+        if ($this->getEngine()->getRuleFacade()->sendRequest($this->url, $this->method, $this->postData, $this->headers, $this->variable, $this->userId) === false) {
             return $this;
         }
         return parent::execute();

@@ -148,7 +148,10 @@ use BotTemplateFramework\TemplateEngine;
         "name": "rule#13",
         "trigger": {"name": "referralPassed"},
         "actions": [
-            {"name": "saveVariable", "variable": "referralData"}
+            {"name": "saveVariable", "variable": "referralData"},
+            {"name": "validate", "value": "123", "type": "number | email | url"},
+            {"name": "request", "url": "http://api.icndb.com/jokes/random", "method": "post", "data": {"name": "Alex", "sex": "male"},
+                "headers": {"Content-Type": "application/json"}, "variable": "testVar"}
         ]
     }
  *
@@ -307,7 +310,9 @@ class RuleEngine {
             case 'validate':
                 return ValidateAction::create($this->getUserId(), $action['type'], isset($action['value']) ? $action['value'] : null);
             case 'request':
-                return RequestAction::create($this->getUserId(), $action['url'], isset($action['data']) ? $action['data'] : null, isset($action['method']) ? $action['method'] : 'post');
+                return RequestAction::create($this->getUserId(), $action['url'], isset($action['data']) ? $action['data'] : null,
+                    isset($action['method']) ? $action['method'] : 'post', isset($action['headers']) ? $action['headers'] : null,
+                    isset($action['variable']) ? $action['variable'] : null);
         }
         return null;
     }
