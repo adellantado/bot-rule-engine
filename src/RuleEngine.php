@@ -168,6 +168,8 @@ class RuleEngine {
 
     protected $userId;
 
+    protected $triggers = [];
+
     public function __construct(TemplateEngine $engine, IRuleFacade $facade, $userId = null) {
         $this->engine = $engine;
         $this->scenario = $engine->getTemplate();
@@ -193,6 +195,10 @@ class RuleEngine {
     public function getUserId() {
         return $this->userId ?? $this->userId = $this->facade->getUserId($this->engine->getBot());
     }
+    
+    public function getTriggers(){
+        return $this->triggers;
+    }
 
     protected function parse() {
         if (!array_key_exists('rules', $this->scenario)) {
@@ -202,6 +208,7 @@ class RuleEngine {
         $trigger = null;
         foreach ($this->scenario['rules'] as $rule) {
             $trigger = $this->getTrigger($rule['trigger']);
+            $this->triggers[$rule['name']] = $trigger;
             /** @var IAction $lastAction */
             $lastAction = null;
             foreach($rule['actions'] as $index=>$action) {
