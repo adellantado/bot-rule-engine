@@ -241,7 +241,7 @@ class RuleEngine {
     protected function getTrigger($trigger) {
         switch($trigger['name']) {
             case 'blockExecuted':
-                return new BlockExecutedTrigger($this, $trigger['block']);
+                return new BlockExecutedTrigger($this, $trigger['block'], $trigger['capturingPhase'] ?? false);
             case 'driverEvent':
                 return new DriverEventTrigger($this, $trigger['event']);
             case 'newUser':

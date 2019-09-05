@@ -40,13 +40,13 @@ class CalculateAction extends AbstractAction {
             $this->getEngine()->getRuleFacade()->getVariable($this->operand2, $this->userId) : $this->operand2;
         $result = 0;
         if ($this->operator == '+') {
-            $result = $operand1 + $operand2;
+            $result = (float)$operand1 + (float)$operand2;
         } elseif ($this->operator == '-') {
-            $result = $operand1 - $operand2;
+            $result = (float)$operand1 - (float)$operand2;
         } elseif ($this->operator == '*') {
-            $result = $operand1 * $operand2;
+            $result = (float)$operand1 * (float)$operand2;
         } elseif ($this->operator == '/') {
-            $result = $operand1 / $operand2;
+            $result = (float)$operand1 / (float)$operand2;
         }
         $this->setDataToNext($result);
         return $this->getEngine()->getRuleFacade()->saveVariable($this->result, $result, $this->userId);
