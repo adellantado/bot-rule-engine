@@ -10,7 +10,7 @@ E.g.
     "rules": [
         {
             "name": "rule#1",
-            "trigger": {"name": "blockExecuted", "block": "EgyptTourBlock"},
+            "trigger": {"name": "blockExecuted", "block": "EgyptTourBlock", "capturingPhase": 1},
             "actions": [
                 {"name": "hasTag", "tag": "Traveler"},
                 {"name": "addTag", "tag": "Egypt"},

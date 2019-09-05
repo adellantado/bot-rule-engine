@@ -10,7 +10,7 @@ class BlockExecutedTrigger extends AbstractTrigger {
         parent::__construct($engine);
         $engine->getTemplateEngine()->addBlockListener($blockName, function(){
             $this->trigger();
-        }, $capturingPhase);
+        }, (boolean)$capturingPhase);
     }
 
 }
