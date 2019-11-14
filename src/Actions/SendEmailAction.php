@@ -21,7 +21,10 @@ class SendEmailAction extends AbstractAction {
     }
 
     public function execute() {
-        if ($this->getEngine()->getRuleFacade()->sendEmail($this->email, $this->text, $this->title) === false) {
+        $email = $this->getEngine()->getValue($this->email);
+        $text = $this->getEngine()->getValue($this->text);
+        $title = $this->getEngine()->getValue($this->title);
+        if ($this->getEngine()->getRuleFacade()->sendEmail($email, $text, $title) === false) {
             return $this;
         }
         return parent::execute();
