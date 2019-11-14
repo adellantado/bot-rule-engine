@@ -21,6 +21,7 @@ use BotRuleEngine\Actions\RemoveVariableAction;
 use BotRuleEngine\Actions\RequestAction;
 use BotRuleEngine\Actions\SaveVariableAction;
 use BotRuleEngine\Actions\SendBlockAction;
+use BotRuleEngine\Actions\SendEmailAction;
 use BotRuleEngine\Actions\SendFlowAction;
 use BotRuleEngine\Actions\UnsubscribeAction;
 use BotRuleEngine\Actions\ValidateAction;
@@ -142,7 +143,7 @@ use BotTemplateFramework\TemplateEngine;
         "actions": [
             {"name": "calculate", "equation": ["firstVar", "+ | - | * | /", "secondVar", "myVariable"]},
             {"name": "sendFlow", "flow": "EgyptTour"},
-            {"name": "sendEmail", "email": "test@test.com", "text":"Email Text Here"}
+            {"name": "sendEmail", "email": "test@test.com", "text":"Email Text Here", "title": "Test Title"}
         ]
     },
     {
@@ -322,7 +323,7 @@ class RuleEngine {
                     isset($action['method']) ? $action['method'] : 'post', isset($action['headers']) ? $action['headers'] : null,
                     isset($action['variable']) ? $action['variable'] : null);
             case 'sendEmail':
-                return NotifyAdminAction::create($action['email'], $action['text']);
+                return SendEmailAction::create($action['email'], $action['text'], $action['title']);
         }
         return null;
     }

@@ -101,7 +101,7 @@ E.g.
             "actions": [
                 {"name": "calculate", "equation": ["firstVar", "+ | - | * | /", "secondVar", "myVariable"]},
                 {"name": "sendFlow", "flow": "EgyptTour"},
-                {"name": "sendEmail", "email": "test@test.com", "text":"Email Text Here"}
+                {"name": "sendEmail", "email": "test@test.com", "text":"Email Text Here", "title": "Test Title"}
             ]
         },
         {  

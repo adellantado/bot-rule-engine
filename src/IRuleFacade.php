@@ -132,9 +132,10 @@ interface IRuleFacade {
     /**
      * @param string $email
      * @param string $text
+     * @param string $title
      * @return mixed
      */
-    public function sendEmail($email, $text);
+    public function sendEmail($email, $text, $title);
 
     /**
      * @return \DateTime
