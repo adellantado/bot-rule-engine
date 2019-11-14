@@ -141,7 +141,8 @@ use BotTemplateFramework\TemplateEngine;
         "trigger": {"name": "external"},
         "actions": [
             {"name": "calculate", "equation": ["firstVar", "+ | - | * | /", "secondVar", "myVariable"]},
-            {"name": "sendFlow", "flow": "EgyptTour"}
+            {"name": "sendFlow", "flow": "EgyptTour"},
+            {"name": "sendEmail", "email": "test@test.com", "text":"Email Text Here"}
         ]
     },
     {
@@ -320,6 +321,8 @@ class RuleEngine {
                 return RequestAction::create($this->getUserId(), $action['url'], isset($action['data']) ? $action['data'] : null,
                     isset($action['method']) ? $action['method'] : 'post', isset($action['headers']) ? $action['headers'] : null,
                     isset($action['variable']) ? $action['variable'] : null);
+            case 'sendEmail':
+                return NotifyAdminAction::create($action['email'], $action['text']);
         }
         return null;
     }

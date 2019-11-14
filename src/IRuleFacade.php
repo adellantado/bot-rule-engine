@@ -130,6 +130,13 @@ interface IRuleFacade {
     public function notifyAdmin($email = null, $userId = null);
 
     /**
+     * @param string $email
+     * @param string $text
+     * @return mixed
+     */
+    public function sendEmail($email, $text);
+
+    /**
      * @return \DateTime
      */
     public function getLastTimerRan();

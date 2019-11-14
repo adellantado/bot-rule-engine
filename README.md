@@ -100,7 +100,8 @@ E.g.
             "trigger": {"name": "external"},
             "actions": [
                 {"name": "calculate", "equation": ["firstVar", "+ | - | * | /", "secondVar", "myVariable"]},
-                {"name": "sendFlow", "flow": "EgyptTour"}
+                {"name": "sendFlow", "flow": "EgyptTour"},
+                {"name": "sendEmail", "email": "test@test.com", "text":"Email Text Here"}
             ]
         },
         {  
