@@ -21,7 +21,8 @@ class SendFlowAction extends AbstractAction {
         if ($this->flow === null) {
             $this->flow = $this->data;
         }
-        if ($this->getEngine()->getRuleFacade()->sendFlow($this->userId, $this->flow) === false) {
+        $flow = $this->getValue($this->flow);
+        if ($this->getEngine()->getRuleFacade()->sendFlow($this->userId, $flow) === false) {
             return $this;
         }
         return parent::execute();

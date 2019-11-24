@@ -21,7 +21,8 @@ class SendBlockAction extends AbstractAction {
         if ($this->block === null) {
             $this->block = $this->data;
         }
-        if ($this->getEngine()->getRuleFacade()->sendBlock($this->userId, $this->block) === false) {
+        $block = $this->getValue($this->block);
+        if ($this->getEngine()->getRuleFacade()->sendBlock($this->userId, $block) === false) {
             return $this;
         }
         return parent::execute();
