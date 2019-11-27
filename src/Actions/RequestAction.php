@@ -16,9 +16,11 @@ class RequestAction extends AbstractAction {
 
     public $variable;
 
+    public $fields;
+
     public $userId;
 
-    public static function create($userId, $url, $data, $method = 'post', $headers = null, $variable = null) {
+    public static function create($userId, $url, $data, $method = 'post', $headers = null, $variable = null, $fields = null) {
         $instance = new RequestAction();
         $instance->userId = $userId;
         $instance->method = $method;
@@ -26,6 +28,7 @@ class RequestAction extends AbstractAction {
         $instance->postData = $data;
         $instance->headers = $headers;
         $instance->variable = $variable;
+        $instance->fields = $fields;
         return $instance;
     }
 
@@ -34,14 +37,14 @@ class RequestAction extends AbstractAction {
             $this->postData = $this->data;
         }
         $this->postData = $this->getValue($this->postData);
-        if ($this->getEngine()->getRuleFacade()->sendRequest($this->url, $this->method, $this->postData, $this->headers, $this->variable, $this->userId) === false) {
+        if ($this->getEngine()->getRuleFacade()->sendRequest($this->url, $this->method, $this->postData, $this->headers, $this->variable, $this->fields, $this->userId) === false) {
             return $this;
         }
         return parent::execute();
     }
 
     public function __sleep() {
-        return array_merge(parent::__sleep(), ['postData', 'url', 'method', 'userId']);
+        return array_merge(parent::__sleep(), ['postData', 'url', 'method', 'headers', 'fields', 'variable', 'userId']);
     }
 
 }

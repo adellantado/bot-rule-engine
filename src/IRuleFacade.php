@@ -171,9 +171,10 @@ interface IRuleFacade {
      * @param $data
      * @param $headers
      * @param $variable
+     * @param $fields
      * @param $userId
      * @return boolean
      */
-    public function sendRequest($url, $method, $data, $headers, $variable, $userId);
+    public function sendRequest($url, $method, $data, $headers, $variable, $fields, $userId);
 
 }
