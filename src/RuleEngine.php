@@ -321,7 +321,7 @@ class RuleEngine {
             case 'request':
                 return RequestAction::create($this->getUserId(), $action['url'], isset($action['data']) ? $action['data'] : null,
                     isset($action['method']) ? $action['method'] : 'post', isset($action['headers']) ? $action['headers'] : null,
-                    isset($action['variable']) ? $action['variable'] : null);
+                    isset($action['variable']) ? $action['variable'] : null, isset($action['fields']) ? $action['fields'] : null);
             case 'sendEmail':
                 return SendEmailAction::create($action['email'], $action['text'], $action['title']);
         }
