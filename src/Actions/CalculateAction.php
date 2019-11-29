@@ -4,6 +4,8 @@
 namespace BotRuleEngine\Actions;
 
 
+use BotTemplateFramework\Events\VariableChangedEvent;
+
 class CalculateAction extends AbstractAction {
 
     public $operand1;
@@ -49,7 +51,9 @@ class CalculateAction extends AbstractAction {
             $result = (float)$operand1 / (float)$operand2;
         }
         $this->setDataToNext($result);
-        return $this->getEngine()->getRuleFacade()->saveVariable($this->result, $result, $this->userId);
+        $res = $this->getEngine()->getRuleFacade()->saveVariable($this->result, $result, $this->userId);
+        $this->dispatchEvent(new VariableChangedEvent($this->result, $result));
+        return $res;
     }
 
     public function __sleep() {

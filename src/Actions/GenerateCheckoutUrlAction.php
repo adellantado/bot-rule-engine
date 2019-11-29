@@ -4,6 +4,8 @@
 namespace BotRuleEngine\Actions;
 
 
+use BotTemplateFramework\Events\VariableChangedEvent;
+
 class GenerateCheckoutUrlAction extends AbstractAction {
 
     public $amount;
@@ -35,6 +37,7 @@ class GenerateCheckoutUrlAction extends AbstractAction {
         if ($facade->saveVariable($this->variable, $url, $this->userId) === false) {
             return $this;
         }
+        $this->dispatchEvent(new VariableChangedEvent($this->variable, $url));
 
         $this->setDataToNext($url);
         return parent::execute();
