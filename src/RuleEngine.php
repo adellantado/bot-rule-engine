@@ -19,6 +19,7 @@ use BotRuleEngine\Actions\OpenChatAction;
 use BotRuleEngine\Actions\RemoveTagAction;
 use BotRuleEngine\Actions\RemoveVariableAction;
 use BotRuleEngine\Actions\RequestAction;
+use BotRuleEngine\Actions\SaveRecordAction;
 use BotRuleEngine\Actions\SaveVariableAction;
 use BotRuleEngine\Actions\SendBlockAction;
 use BotRuleEngine\Actions\SendEmailAction;
@@ -153,7 +154,8 @@ use BotTemplateFramework\TemplateEngine;
             {"name": "saveVariable", "variable": "referralData"},
             {"name": "validate", "value": "123", "type": "number | email | url"},
             {"name": "request", "url": "http://api.icndb.com/jokes/random", "method": "post", "data": {"name": "Alex", "sex": "male"},
-                "headers": {"Content-Type": "application/json"}, "variable": "testVar"}
+                "headers": {"Content-Type": "application/json"}, "variable": "testVar"},
+            {"name": "saveRecord", "table": "my_table", "variables":"var1,var2,var3"}
         ]
     }
  *
@@ -324,6 +326,12 @@ class RuleEngine {
                     isset($action['variable']) ? $action['variable'] : null, isset($action['fields']) ? $action['fields'] : null);
             case 'sendEmail':
                 return SendEmailAction::create($action['email'], $action['text'], $action['title']);
+            case 'saveRecord':
+                return SaveRecordAction::create($this->getUserId(),
+                    isset($action['table']) ? $action['table'] : null,
+                    $action['variables'],
+                    isset($action['fields']) ? $action['fields'] : '',
+                    isset($action['default']) ? $action['default'] : '');
         }
         return null;
     }

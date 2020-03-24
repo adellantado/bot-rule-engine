@@ -177,4 +177,13 @@ interface IRuleFacade {
      */
     public function sendRequest($url, $method, $data, $headers, $variable, $fields, $userId);
 
+    /**
+     * @param $table
+     * @param array $variables
+     * @param array $fields
+     * @param array $default
+     * @param $userId
+     * @return boolean
+     */
+    public function saveRecord($table, array $variables, array $fields, array $default, $userId);
 }
