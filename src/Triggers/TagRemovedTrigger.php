@@ -11,6 +11,7 @@ class TagRemovedTrigger extends AbstractTrigger {
 
     public function __construct(RuleEngine $engine, $tag) {
         parent::__construct($engine);
+        $tag = $this->getValue($tag);
         $engine->getTemplateEngine()->addEventListener('tagRemoved', function(TagRemovedEvent $event) use ($tag) {
             if ($event->tag == $tag) {
                 $this->action->setData($event->tag);

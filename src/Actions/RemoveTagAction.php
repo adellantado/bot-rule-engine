@@ -21,12 +21,14 @@ class RemoveTagAction extends AbstractAction {
 
     public function execute() {
         if ($this->tag === null) {
-            $this->tag = $this->data;
+            $tag = $this->data;
+        } else {
+            $tag = $this->getValue($this->tag);
         }
-        if ($this->getEngine()->getRuleFacade()->removeTag($this->tag, $this->userId) === false) {
+        if ($this->getEngine()->getRuleFacade()->removeTag($tag, $this->userId) === false) {
             return $this;
         }
-        $this->dispatchEvent(new TagRemovedEvent($this->tag));
+        $this->dispatchEvent(new TagRemovedEvent($tag));
         return parent::execute();
     }
 

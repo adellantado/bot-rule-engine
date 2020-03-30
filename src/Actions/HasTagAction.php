@@ -18,7 +18,8 @@ class HasTagAction extends AbstractAction {
     }
 
     public function execute() {
-        if ($this->getEngine()->getRuleFacade()->hasTag($this->tag, $this->userId) === false) {
+        $tag = $this->getValue($this->tag);
+        if ($this->getEngine()->getRuleFacade()->hasTag($tag, $this->userId) === false) {
             return $this;
         }
         return parent::execute();
